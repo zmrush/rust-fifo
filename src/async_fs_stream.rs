@@ -73,7 +73,8 @@ impl AsyncWrite for AsyncFsStream{
         self: Pin<&mut Self>,
         cx: &mut Context<'_>,
     ) -> Poll<Result<()>> {
-        Poll::Ready(self.0.get_ref().flush())
+        let mut mmm = self.0.get_ref();
+        Poll::Ready(mmm.flush())
     }
     fn poll_shutdown(
         self: Pin<&mut Self>,
